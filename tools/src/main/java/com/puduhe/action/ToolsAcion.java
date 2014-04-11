@@ -27,7 +27,49 @@ import com.puduhe.util.io.FileUtil;
  *
  */
 @Controller
-public class ToolsAcion {    
+public class ToolsAcion { 
+    /**
+     * rsa
+     * @param request
+     * @param response
+     * @param model
+     * @param value
+     * @param character
+     * @param otherCharacter
+     * @return
+     */
+    @RequestMapping("/tools/rsa")
+    public String rsa(HttpServletRequest request, 
+            HttpServletResponse response,
+            Model model,
+            @RequestParam(value="value", required=false) String value,
+            @RequestParam(value="character", required=false,defaultValue="UTF-8") String character,
+            @RequestParam(value="other_character", required=false ,defaultValue="") String otherCharacter) {
+        if(value==null){
+            model.addAttribute("character", character);
+            model.addAttribute("otherCharacter", otherCharacter);
+            return "tools/sha1";
+        }
+        String charset = null;
+        if(StringUtils.isNotBlank(otherCharacter)){
+            try {
+                Charset.forName(otherCharacter);
+                charset = otherCharacter;
+            }
+            catch (UnsupportedCharsetException e) {}            
+        }else{
+            charset = character;
+        }
+        String outValue=null;
+        if(StringUtils.isNotBlank(value)){
+            outValue = SecurityFactory.SHA1Encode(value, charset);
+        }
+        model.addAttribute("outValue", outValue);
+        model.addAttribute("value", value);
+        model.addAttribute("character", character);
+        model.addAttribute("otherCharacter", otherCharacter);
+        return "tools/rsa";
+    }
     /**
      * sha1
      * @param request
