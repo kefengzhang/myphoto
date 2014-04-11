@@ -29,7 +29,7 @@ import com.puduhe.util.io.FileUtil;
 @Controller
 public class ToolsAcion {    
     /**
-     * css格式化
+     * sha1
      * @param request
      * @param response
      * @param model
