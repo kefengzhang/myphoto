@@ -62,7 +62,7 @@ public class ToolsAcion {
         }
         String outValue=null;
         if(StringUtils.isNotBlank(value)){
-            outValue = SecurityFactory.SHA1Encode(value, charset);
+            //outValue = SecurityFactory.RSAEncode(plaintext, modulus, publicExponent);
         }
         model.addAttribute("outValue", outValue);
         model.addAttribute("value", value);
